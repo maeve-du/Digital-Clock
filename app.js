@@ -18,45 +18,51 @@ style="fill: rgb(255, 255, 255);">
 </svg>`;
 
 isOn = false;
-audio.autoplay = false;
-
 
 playBtn.addEventListener('click', () => {
     isOn = !isOn;
 
     playBtnHtml = isOn ? svgOn : svgOff
     playBtn.innerHTML = playBtnHtml
-    audio.src = './tick.m4a';
+    audio.src = './tick2.m4a';
     audio.muted = false;
-    let audioPlay = setInterval(audioTimer, 1000)
-    function audioTimer() {
-        if (!isOn) {
-            clearInterval(audioPlay)
-        } else {
-            audio.play().catch(err => {
-                console.log('Error:', err)
-            });
-        }
-
+    if (isOn) {
+        const now = new Date();
+        // 音频前00:00:00.15 为空内容，约等于500milliSeconds
+        const milliSeconds = now.getMilliseconds()
+        const delay = (1000 - 495) + (1000 - milliSeconds)
+        console.log('MilliSeconds', milliSeconds)
+        console.log('delay', delay)
+        setTimeout(() => {
+            audio.play();
+            audio.muted = false;
+            audio.autoplay = true;
+            audio.loop = true;
+        }, delay);
+    } else {
+        audio.pause();
+        audio.currentTime = 0;
     }
 })
 
+
+
 playBtn.addEventListener('gestureend', () => {
     isOn = !isOn;
+
     playBtnHtml = isOn ? svgOn : svgOff
     playBtn.innerHTML = playBtnHtml
     audio.src = './tick.m4a';
     audio.muted = false;
-    let audioPlay = setInterval(audioTimer, 1000)
-    function audioTimer() {
-        if (!isOn) {
-            clearInterval(audioPlay)
-        } else {
-            audio.play().catch(err => {
-                console.log('Error:', err)
-            });
-        }
-
+    if (isOn) {
+        setTimeout(() => {
+            audio.play();
+            audio.muted = false;
+            audio.autoplay = true;
+            audio.loop = true;
+        }, 5000);
+    } else {
+        audio.pause()
     }
 })
 
