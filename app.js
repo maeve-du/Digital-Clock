@@ -24,7 +24,7 @@ playBtn.addEventListener('click', () => {
 
     playBtnHtml = isOn ? svgOn : svgOff
     playBtn.innerHTML = playBtnHtml
-    audio.src = './tick2.m4a';
+    audio.src = './tick-long.m4a';
     audio.muted = false;
     if (isOn) {
         const now = new Date();
