@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <style>
+        root {
+            font-size: 62.5%;
+        }
+
+        body {
+            font-size: 1rem;
+            margin: 0;
+            padding: p;
+            background-color: rgb(18, 16, 20);
+            color: #fff;
+            transition: .4s;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container {
+            height: 100vh;
+            display: flex;
+            text-align: center;
+            font-size: 20rem;
+            /* margin: 4rem auto; */
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        @media screen and (max-width: 1450px) {
+            .container {
+                font-size: 13rem !important;
+                /* background-color: red; */
+            }
+
+        }
+
+        @media screen and (max-width: 920px) {
+            .container {
+                font-size: 7rem !important;
+                /* background-color: red; */
+            }
+
+        }
+
+        @media screen and (max-width: 590px) {
+            .container {
+                font-size: 3rem !important;
+                /* background-color: red; */
+
+            }
+
+            .clock {
+                gap: 0.2rem
+            }
+
+        }
+
+        @media screen and (max-width: 320px) {
+            .container {
+                font-size: 2rem !important;
+                /* background-color: red; */
+
+            }
+
+            .clock {
+                gap: 0.3rem !important;
+            }
+
+        }
+
+        @media screen and (max-width: 100px) {
+            .container {
+                font-size: 0.8rem !important;
+                /* background-color: red; */
+
+            }
+
+            .clock {
+                gap: 0.1rem !important;
+            }
+
+        }
+
+
+
+
+        span.time {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 0.3em;
+            border-radius: 0.2em;
+        }
+
+        .clock {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        span.flash {
+            animation: flash 1s ease-in-out;
+        }
+
+        @keyframes flash {
+            0% {
+                opacity: 0;
+            }
+
+
+            50% {
+                opacity: 100;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="clock">
+
+        </div>
+    </div>
+
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
