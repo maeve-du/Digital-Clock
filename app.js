@@ -1,5 +1,5 @@
 const clock = document.querySelector('.clock')
-
+const audio = new Audio('tick.m4a');
 
 const tick = () => {
     const now = new Date();
@@ -34,6 +34,14 @@ const tick = () => {
     `
 }
 
+// const btn = document.querySelector('button')
+// const audio = new Audio('tick.m4a');
+// btn.addEventListener('click', () => {
+
+// })
+
+
 setInterval(() => {
     tick()
+    audio.play()
 }, 1000)
