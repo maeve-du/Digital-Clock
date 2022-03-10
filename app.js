@@ -1,6 +1,6 @@
 const clock = document.querySelector('.clock');
-const audio = new Audio('./tick.m4a');
-const soundBtn = document.querySelector('.sound')
+const audio = document.querySelector('audio')
+const playBtn = document.querySelector('.playBtn');
 const svgOn = `<svg class="sound-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 style="fill: rgb(255, 255, 255);">
 <path
@@ -18,19 +18,46 @@ style="fill: rgb(255, 255, 255);">
 </svg>`;
 
 isOn = false;
+audio.autoplay = false;
 
-soundBtn.addEventListener('click', () => {
-    isOn = !isOn
-    soundHtml = isOn ? svgOn : svgOff
-    soundBtn.innerHTML = soundHtml
 
+playBtn.addEventListener('click', () => {
+    isOn = !isOn;
+
+    playBtnHtml = isOn ? svgOn : svgOff
+    playBtn.innerHTML = playBtnHtml
+    audio.src = './tick.m4a';
+    audio.muted = false;
+    let audioPlay = setInterval(audioTimer, 1000)
+    function audioTimer() {
+        if (!isOn) {
+            clearInterval(audioPlay)
+        } else {
+            audio.play().catch(err => {
+                console.log('Error:', err)
+            });
+        }
+
+    }
 })
 
-soundBtn.addEventListener('gestureend', () => {
-    isOn = !isOn
-    soundHtml = isOn ? svgOn : svgOff
-    soundBtn.innerHTML = soundHtml
+playBtn.addEventListener('gestureend', () => {
+    isOn = !isOn;
+    playBtnHtml = isOn ? svgOn : svgOff
+    playBtn.innerHTML = playBtnHtml
+    audio.src = './tick.m4a';
+    audio.muted = false;
+    let audioPlay = setInterval(audioTimer, 1000)
+    function audioTimer() {
+        if (!isOn) {
+            clearInterval(audioPlay)
+        } else {
+            audio.play().catch(err => {
+                console.log('Error:', err)
+            });
+        }
 
+    }
 })
 
 
@@ -41,40 +68,30 @@ const tick = () => {
 
     let m = now.getMinutes();
     let s = now.getSeconds()
-    // console.log('h', h, 'm', m, 's', s);
-    // console.log(clock);
+
+    let hHtml = '';
+    h < 10 ? hHtml = `<span class="time">0${h}</span>`
+        : h === 0 ? hHtml = `<span class="time">00</span>`
+            : `<span class="time">${h}</span>`
 
     let mHTML = '';
-
     m < 10 ? mHTML = `<span class="time">0${m}</span>`
         : m === 0 ? mHTML = `<span class="time">00</span>`
             : mHTML = `<span class="time">${m}</span>`
 
+
+
     let sHTML = '';
-    if (s < 10) {
-        sHTML = `<span class="time">0${s}</span>`
-    } else if (s === 0) {
-        sHTML = `<span class="time">00</span>`
-    }
-    else {
-        sHTML = `<span class="time">${s}</span>`
-    };
+    s < 10 ? sHTML = `<span class="time">0${s}</span>`
+        : s === 0 ? sHTML = `<span class="time">00</span>`
+            : sHTML = `<span class="time">${s}</span>`
 
     clock.innerHTML = `
-    <span class="time"> ${h}</span><span class="flash"> : </span>
+    ${hHtml}<span class="flash"> : </span>
     ${mHTML}<span class="flash"> : </span>
     ${sHTML}
     `
 }
-
 setInterval(() => {
     tick();
-    audio.autoplay = false;
-    if (isOn) {
-        audio.src = './tick.m4a'
-        audio.play().catch(err => {
-            console.log('Error:', err)
-        });
-
-    }
 }, 1000)
