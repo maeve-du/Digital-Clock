@@ -69,9 +69,12 @@ const tick = () => {
 
 setInterval(() => {
     tick();
+    audio.autoplay = false;
     if (isOn) {
+        audio.src = './tick.m4a'
         audio.play().catch(err => {
             console.log('Error:', err)
         });
+
     }
 }, 1000)
