@@ -12,14 +12,6 @@ const tick = () => {
     // console.log(clock);
 
     let mHTML = ''
-    // if (m < 10) {
-    //     mHTML = `<span class="time">0${m}</span>`
-    // } else if (m === 0) {
-    //     mHTML = `<span class="time">00</span>`
-    // }
-    // else {
-    //     mHTML = `<span class="time">${m}</span>`
-    // };
 
     m < 10 ? mHTML = `<span class="time">0${m}</span>`
         : m === 0 ? mHTML = `<span class="time">00</span>`
@@ -41,9 +33,6 @@ const tick = () => {
     ${sHTML}
     `
 }
-
-// tick()
-
 
 setInterval(() => {
     tick()
