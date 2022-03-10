@@ -26,6 +26,13 @@ soundBtn.addEventListener('click', () => {
 
 })
 
+soundBtn.addEventListener('gestureend', () => {
+    isOn = !isOn
+    soundHtml = isOn ? svgOn : svgOff
+    soundBtn.innerHTML = soundHtml
+
+})
+
 
 const tick = () => {
     const now = new Date();
