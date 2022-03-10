@@ -34,12 +34,6 @@ const tick = () => {
     `
 }
 
-// const btn = document.querySelector('button')
-// const audio = new Audio('tick.m4a');
-// btn.addEventListener('click', () => {
-
-// })
-
 
 setInterval(() => {
     tick()
