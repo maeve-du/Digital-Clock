@@ -1,4 +1,4 @@
-const clock = document.querySelector('.clock')
+const clock = document.querySelector('.clock');
 const audio = new Audio('./tick.m4a');
 
 const tick = () => {
@@ -11,7 +11,7 @@ const tick = () => {
     // console.log('h', h, 'm', m, 's', s);
     // console.log(clock);
 
-    let mHTML = ''
+    let mHTML = '';
 
     m < 10 ? mHTML = `<span class="time">0${m}</span>`
         : m === 0 ? mHTML = `<span class="time">00</span>`
@@ -36,6 +36,8 @@ const tick = () => {
 
 
 setInterval(() => {
-    tick()
-    audio.play()
+    tick();
+    audio.play().catch(err => {
+        console.log('Error:', err)
+    });
 }, 1000)
