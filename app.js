@@ -1,5 +1,5 @@
 const clock = document.querySelector('.clock')
-const audio = new Audio('tick.m4a');
+const audio = new Audio('./tick.m4a');
 
 const tick = () => {
     const now = new Date();
