@@ -1,6 +1,7 @@
 const clock = document.querySelector('.clock');
-const audio = document.querySelector('audio')
+const audio = document.querySelector('audio');
 const playBtn = document.querySelector('.playBtn');
+const copyright = document.querySelector('.copyright');
 const svgOn = `<svg class="sound-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 style="fill: rgb(255, 255, 255);">
 <path
@@ -17,27 +18,29 @@ style="fill: rgb(255, 255, 255);">
 </path>
 </svg>`;
 
+
 isOn = false;
+let now;
 
 playBtn.addEventListener('click', () => {
     isOn = !isOn;
-
     playBtnHtml = isOn ? svgOn : svgOff
     playBtn.innerHTML = playBtnHtml
     audio.src = './tick-long.m4a';
     audio.muted = false;
     if (isOn) {
-        const now = new Date();
         // 音频前00:00:00.15 为空内容，约等于500milliSeconds
         const milliSeconds = now.getMilliseconds()
         const delay = (1000 - 495) + (1000 - milliSeconds)
-        console.log('MilliSeconds', milliSeconds)
-        console.log('delay', delay)
         setTimeout(() => {
-            audio.play();
-            audio.muted = false;
-            audio.autoplay = true;
-            audio.loop = true;
+            // doulbe check, otherwise if users do super quick mutil clicks, even ended at off state, the tiemer still gonna be trigerd when time's up
+            if (isOn) {
+                audio.play();
+                audio.muted = false;
+                audio.autoplay = true;
+                audio.loop = true;
+            }
+
         }, delay);
     } else {
         audio.pause();
@@ -45,35 +48,10 @@ playBtn.addEventListener('click', () => {
     }
 })
 
-
-
-
-
-playBtn.addEventListener('gestureend', () => {
-    isOn = !isOn;
-
-    playBtnHtml = isOn ? svgOn : svgOff
-    playBtn.innerHTML = playBtnHtml
-    audio.src = './tick.m4a';
-    audio.muted = false;
-    if (isOn) {
-        setTimeout(() => {
-            audio.play();
-            audio.muted = false;
-            audio.autoplay = true;
-            audio.loop = true;
-        }, 5000);
-    } else {
-        audio.pause()
-    }
-})
-
+// gestureend
 
 const tick = () => {
-    const now = new Date();
-    // console.log(now);
     let h = now.getHours();
-
     let m = now.getMinutes();
     let s = now.getSeconds()
 
@@ -100,6 +78,15 @@ const tick = () => {
     ${sHTML}
     `
 }
+
+
+
 setInterval(() => {
+    now = new Date();
     tick();
+
 }, 1000)
+
+// You should only be calling methods like getFullYear on a valid Date object.
+const year = new Date().getFullYear();
+copyright.innerHTML = `<div class="copyright">©${year} Maeve Du</div>`
