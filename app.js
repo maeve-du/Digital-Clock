@@ -47,6 +47,8 @@ playBtn.addEventListener('click', () => {
 
 
 
+
+
 playBtn.addEventListener('gestureend', () => {
     isOn = !isOn;
 
@@ -70,7 +72,7 @@ playBtn.addEventListener('gestureend', () => {
 const tick = () => {
     const now = new Date();
     // console.log(now);
-    const h = now.getHours();
+    let h = now.getHours();
 
     let m = now.getMinutes();
     let s = now.getSeconds()
@@ -78,7 +80,7 @@ const tick = () => {
     let hHtml = '';
     h < 10 ? hHtml = `<span class="time">0${h}</span>`
         : h === 0 ? hHtml = `<span class="time">00</span>`
-            : `<span class="time">${h}</span>`
+            : hHtml = `<span class="time">${h}</span>`
 
     let mHTML = '';
     m < 10 ? mHTML = `<span class="time">0${m}</span>`
